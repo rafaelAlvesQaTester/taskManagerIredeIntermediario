@@ -1,47 +1,43 @@
 # 📋 Task Manager
 
-Sistema de Gerenciamento de Tarefas desenvolvido em **Java** utilizando **Programação Orientada a Objetos (POO)** e arquitetura **MVC (Model-View-Controller)**.
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Maven](https://img.shields.io/badge/Maven-3.x-red)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-brightgreen)
+![License](https://img.shields.io/badge/Licença-Educacional-blue)
 
-Este projeto foi desenvolvido como atividade prática da disciplina de Java da **Residência em TIC - IREDE**, com o objetivo de aplicar os principais conceitos estudados durante o curso.
+Sistema de Gerenciamento de Tarefas desenvolvido em **Java**, utilizando os conceitos de **Programação Orientada a Objetos (POO)** e arquitetura **MVC (Model-View-Controller)**.
+
+Este projeto foi desenvolvido como atividade prática da disciplina de **Java** da **Residência em TIC - IREDE**, tendo como objetivo consolidar os conhecimentos adquiridos durante o curso por meio do desenvolvimento de uma aplicação em modo console.
 
 ---
 
 # 🎯 Objetivo
 
-Desenvolver uma aplicação em modo console capaz de gerenciar tarefas, permitindo ao usuário:
+Desenvolver uma aplicação capaz de gerenciar tarefas através do terminal, permitindo ao usuário realizar operações de cadastro, consulta, atualização e remoção de tarefas.
 
-- Cadastrar tarefas
-- Listar tarefas
-- Marcar tarefas como concluídas
-- Remover tarefas
-
-Além das funcionalidades, o projeto busca aplicar conceitos de:
+Além das funcionalidades propostas, o projeto aplica conceitos importantes da linguagem Java, como:
 
 - Programação Orientada a Objetos
 - Encapsulamento
-- Organização em pacotes (Packages)
-- Tratamento de Exceções
-- Collections
 - Enum
+- Collections
+- Tratamento de Exceções
+- Organização em Packages
 - Arquitetura MVC
 
 ---
 
 # 🚀 Funcionalidades
 
-✔ Adicionar tarefa
+O sistema permite:
 
-✔ Listar todas as tarefas
-
-✔ Concluir tarefa
-
-✔ Remover tarefa
-
-✔ Validação de entradas
-
-✔ Tratamento de exceções
-
-✔ Interface interativa em console
+- ✅ Cadastrar tarefas
+- ✅ Listar todas as tarefas
+- ✅ Concluir tarefas
+- ✅ Remover tarefas
+- ✅ Validar entradas do usuário
+- ✅ Tratar exceções personalizadas
+- ✅ Interface em modo Console
 
 ---
 
@@ -51,7 +47,7 @@ Além das funcionalidades, o projeto busca aplicar conceitos de:
 |------------|---------|
 | Java | 17 |
 | Maven | 3.x |
-| Apache NetBeans | IDE utilizada no desenvolvimento |
+| Apache NetBeans | IDE oficial utilizada no curso |
 | IntelliJ IDEA | Compatível |
 
 ---
@@ -79,16 +75,16 @@ taskManager
 │                           │     ├── Tarefa.java
 │                           │     └── StatusTarefa.java
 │                           │
+│                           ├── view
+│                           │     └── Menu.java
+│                           │
 │                           ├── exception
 │                           │     ├── EntradaInvalidaException.java
 │                           │     ├── TarefaNaoEncontradaException.java
 │                           │     └── TarefaJaConcluidaException.java
 │                           │
-│                           ├── utils
-│                           │     └── Formatador.java
-│                           │
-│                           └── view
-│                                 └── Menu.java
+│                           └── utils
+│                                 └── Formatador.java
 │
 ├── pom.xml
 └── README.md
@@ -98,24 +94,24 @@ taskManager
 
 # 🏛 Arquitetura
 
-O projeto segue o padrão **MVC (Model-View-Controller)**.
+O projeto foi desenvolvido seguindo a arquitetura **MVC (Model-View-Controller)**.
 
 ```
                  Usuário
                     │
                     ▼
-             Menu (View)
+              Menu (View)
                     │
                     ▼
       TaskController (Controller)
                     │
                     ▼
-         Tarefa (Model)
+            Tarefa (Model)
 ```
 
-### Model
+## Model
 
-Representa os dados da aplicação.
+Responsável pelos dados da aplicação.
 
 Classes:
 
@@ -124,9 +120,9 @@ Classes:
 
 ---
 
-### View
+## View
 
-Responsável pela interação com o usuário através do console.
+Responsável pela interação com o usuário.
 
 Classe:
 
@@ -134,9 +130,9 @@ Classe:
 
 ---
 
-### Controller
+## Controller
 
-Responsável por controlar toda a lógica do sistema.
+Responsável por toda a lógica do sistema.
 
 Classe:
 
@@ -144,7 +140,7 @@ Classe:
 
 ---
 
-### Exceptions
+## Exception
 
 Responsável pelo tratamento das exceções personalizadas.
 
@@ -156,9 +152,9 @@ Classes:
 
 ---
 
-### Utils
+## Utils
 
-Possui métodos auxiliares utilizados durante a execução.
+Responsável pelos métodos auxiliares.
 
 Classe:
 
@@ -168,15 +164,25 @@ Classe:
 
 # ▶ Como Executar
 
-Clone ou abra o projeto no Apache NetBeans ou IntelliJ IDEA.
+## Clonar o projeto
 
-### Compilar
+```bash
+git clone https://github.com/seu-usuario/taskManager.git
+```
+
+ou apenas abra o projeto diretamente no Apache NetBeans ou IntelliJ IDEA.
+
+---
+
+## Compilar
 
 ```bash
 mvn clean compile
 ```
 
-### Executar
+---
+
+## Executar
 
 ```bash
 mvn exec:java
@@ -196,11 +202,13 @@ Main.java
 
 ---
 
-# 🖥 Exemplo de Execução
+# 🖥 Exemplo Completo de Utilização
+
+Ao iniciar a aplicação, será apresentado o menu principal.
 
 ```
 ========================================
-          TASK MANAGER
+           TASK MANAGER
 ========================================
 
 1 - Adicionar tarefa
@@ -214,59 +222,250 @@ Escolha uma opção:
 
 ---
 
-## Cadastro de tarefa
+## 1️⃣ Adicionar uma tarefa
 
 ```
+Escolha uma opção: 1
+
+========================================
+          NOVA TAREFA
+========================================
+
 Digite o título:
 
 Estudar Java
 
 Digite a descrição:
 
-Revisar Programação Orientada a Objetos
+Revisar Programação Orientada a Objetos.
 
-Tarefa cadastrada com sucesso.
+Tarefa cadastrada com sucesso!
+
+ID da tarefa: 1
 ```
 
 ---
 
-## Listagem
+## 2️⃣ Adicionar uma segunda tarefa
 
 ```
+Escolha uma opção: 1
+
+========================================
+          NOVA TAREFA
+========================================
+
+Digite o título:
+
+Desenvolver Task Manager
+
+Digite a descrição:
+
+Implementar o projeto final da disciplina.
+
+Tarefa cadastrada com sucesso!
+
+ID da tarefa: 2
+```
+
+---
+
+## 3️⃣ Listar tarefas
+
+```
+Escolha uma opção: 2
+
+========================================
+        LISTA DE TAREFAS
+========================================
+
 ID: 1
 
 Título: Estudar Java
 
-Descrição: Revisar Programação Orientada a Objetos
+Descrição: Revisar Programação Orientada a Objetos.
+
+Status: Pendente
+
+----------------------------------------
+
+ID: 2
+
+Título: Desenvolver Task Manager
+
+Descrição: Implementar o projeto final da disciplina.
 
 Status: Pendente
 ```
 
 ---
 
-## Conclusão
+## 4️⃣ Concluir uma tarefa
 
 ```
-Digite o ID:
+Escolha uma opção: 3
+
+========================================
+       CONCLUIR TAREFA
+========================================
+
+Digite o ID da tarefa:
 
 1
 
-Tarefa concluída com sucesso.
+Tarefa concluída com sucesso!
 ```
 
 ---
 
-# 📚 Conceitos de Programação Aplicados
+## 5️⃣ Listar novamente
 
-Durante o desenvolvimento foram aplicados os seguintes conceitos:
+```
+Escolha uma opção: 2
+
+========================================
+        LISTA DE TAREFAS
+========================================
+
+ID: 1
+
+Título: Estudar Java
+
+Descrição: Revisar Programação Orientada a Objetos.
+
+Status: Concluída
+
+----------------------------------------
+
+ID: 2
+
+Título: Desenvolver Task Manager
+
+Descrição: Implementar o projeto final da disciplina.
+
+Status: Pendente
+```
+
+---
+
+## 6️⃣ Remover uma tarefa
+
+```
+Escolha uma opção: 4
+
+========================================
+        REMOVER TAREFA
+========================================
+
+Digite o ID da tarefa:
+
+2
+
+Tarefa removida com sucesso!
+```
+
+---
+
+## 7️⃣ Listagem após remoção
+
+```
+Escolha uma opção: 2
+
+========================================
+        LISTA DE TAREFAS
+========================================
+
+ID: 1
+
+Título: Estudar Java
+
+Descrição: Revisar Programação Orientada a Objetos.
+
+Status: Concluída
+```
+
+---
+
+## 8️⃣ Exemplo de erro
+
+Tentando concluir uma tarefa inexistente.
+
+```
+Escolha uma opção: 3
+
+Digite o ID da tarefa:
+
+10
+
+Erro: Nenhuma tarefa foi encontrada com o ID 10.
+```
+
+---
+
+## 9️⃣ Exemplo de validação
+
+Tentando cadastrar uma tarefa sem informar o título.
+
+```
+Escolha uma opção: 1
+
+Digite o título:
+
+
+Digite a descrição:
+
+Teste
+
+Erro: O título da tarefa não pode ficar vazio.
+```
+
+---
+
+## 🔟 Encerrando a aplicação
+
+```
+Escolha uma opção: 0
+
+Task Manager encerrado.
+
+Obrigado por utilizar o sistema!
+```
+
+---
+
+# 🔄 Fluxo da Aplicação
+
+```
+Início
+   │
+   ▼
+Menu Principal
+   │
+   ├──────────────► Adicionar Tarefa
+   │
+   ├──────────────► Listar Tarefas
+   │
+   ├──────────────► Concluir Tarefa
+   │
+   ├──────────────► Remover Tarefa
+   │
+   └──────────────► Encerrar Sistema
+```
+
+---
+
+# 📚 Conceitos Aplicados
+
+Durante o desenvolvimento foram utilizados os seguintes conceitos:
 
 ## Programação Orientada a Objetos
 
 - Classes
 - Objetos
 - Encapsulamento
-- Métodos
 - Construtores
+- Métodos
+- Sobrescrita de métodos (`toString()`)
 
 ---
 
@@ -278,8 +477,20 @@ Separação da aplicação em:
 - controller
 - model
 - view
-- utils
 - exception
+- utils
+
+---
+
+## Collections
+
+Utilização da classe:
+
+```
+ArrayList
+```
+
+para armazenamento das tarefas em memória.
 
 ---
 
@@ -291,28 +502,16 @@ Utilização da enumeração:
 StatusTarefa
 ```
 
-com os estados:
+Estados disponíveis:
 
 - PENDENTE
 - CONCLUIDA
 
 ---
 
-## Collections
-
-Utilização de:
-
-```
-ArrayList
-```
-
-para armazenamento das tarefas em memória.
-
----
-
 ## Tratamento de Exceções
 
-Exceções personalizadas:
+Foram implementadas exceções personalizadas para melhorar o controle dos erros da aplicação.
 
 - EntradaInvalidaException
 - TarefaNaoEncontradaException
@@ -320,43 +519,68 @@ Exceções personalizadas:
 
 ---
 
-# 📌 Funcionamento
+# 📌 Funcionamento Interno
 
-O usuário interage com o sistema através do Menu.
+A aplicação segue o seguinte fluxo:
 
-O Menu envia as solicitações para o Controller.
+```
+Usuário
 
-O Controller realiza as operações utilizando os objetos da camada Model.
+↓
 
-Quando necessário, exceções personalizadas são lançadas para informar situações de erro.
+Menu
 
-Todo o processamento ocorre em memória utilizando uma lista de tarefas.
+↓
+
+TaskController
+
+↓
+
+Tarefa
+
+↓
+
+Resposta ao usuário
+```
+
+Todo o processamento é realizado em memória utilizando uma lista (`ArrayList<Tarefa>`).
 
 ---
 
 # 🔮 Melhorias Futuras
 
-O projeto poderá ser expandido com:
+Este projeto poderá ser expandido com novas funcionalidades, como:
 
 - Persistência em banco de dados
-- Salvamento em arquivo
+- Salvamento em arquivos
 - Edição de tarefas
+- Pesquisa por título
+- Pesquisa por status
 - Prioridade das tarefas
 - Datas de vencimento
-- Pesquisa por título
-- Interface gráfica JavaFX
-- API REST com Spring Boot
+- Interface gráfica com JavaFX
+- API REST utilizando Spring Boot
+- Autenticação de usuários
+- Testes automatizados
 
 ---
 
 # 👨‍💻 Autor
 
-**Gustavo Affonso Bovo**
+**MARCOS RAFAEL ALVES**
 
-Projeto desenvolvido para a disciplina de Java da **Residência em TIC - IREDE**.
+Análista de Sistemas | Pós-Graduando em Testes de Software | Análise de Testes de Software Júníor
+
+Projeto desenvolvido para a disciplina de **Java** da **Residência em - IREDE**.
 
 ---
 
 # 📄 Licença
 
-Projeto desenvolvido exclusivamente para fins acadêmicos e de aprendizagem.
+Este projeto foi desenvolvido exclusivamente para fins acadêmicos e educacionais.
+
+Sua utilização é livre para estudos e aperfeiçoamento da linguagem Java.
+
+---
+
+⭐ Caso este projeto tenha sido útil para seus estudos, deixe uma estrela no repositório!
