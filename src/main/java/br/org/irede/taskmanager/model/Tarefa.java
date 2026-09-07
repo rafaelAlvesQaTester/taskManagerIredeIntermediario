@@ -43,11 +43,17 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return "Tarefa{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", status=" + status +
-                '}';
+        String situacao;
+
+        if (status == StatusTarefa.CONCLUIDA) {
+            situacao = "Concluída";
+        } else {
+            situacao = "Pendente";
+        }
+
+        return "ID: " + id +
+                "\nTítulo: " + titulo +
+                "\nDescrição: " + descricao +
+                "\nStatus: " + situacao;
     }
 }
