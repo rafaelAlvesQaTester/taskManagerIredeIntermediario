@@ -584,3 +584,36 @@ Sua utilização é livre para estudos e aperfeiçoamento da linguagem Java.
 ---
 
 ⭐ Caso este projeto tenha sido útil para seus estudos, deixe uma estrela no repositório!
+
+---
+
+# Versão Intermediária
+
+Esta versão também contém a evolução solicitada no módulo intermediário:
+
+- `TaskManager<T extends Tarefa>` com `?`, `? extends T` e `? super T`;
+- interface gráfica JavaFX com FXML e CSS;
+- persistência SQLite usando JDBC e `PreparedStatement`;
+- testes automatizados com JUnit 5;
+- `TarefaPrioritaria` como exemplo de subclasse aceita pelo Generic.
+
+## Executar a interface gráfica
+
+```bash
+mvn clean javafx:run
+```
+
+Ou:
+
+```bash
+mvn clean compile exec:java
+```
+
+O banco `taskmanager.db` e a tabela `tarefas` são criados automaticamente na
+primeira execução.
+
+## Executar os testes
+
+```bash
+mvn test
+```

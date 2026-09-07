@@ -1,0 +1,80 @@
+package br.org.irede.taskmanager.model;
+
+import br.org.irede.taskmanager.exception.TarefaJaConcluidaException;
+import br.org.irede.taskmanager.exception.TarefaNaoEncontradaException;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class TaskManagerTest {
+
+    @Test
+    void deveAdicionarEListarTarefasDoTipoGenerico() {
+        TaskManager<Tarefa> manager = new TaskManager<>();
+        Tarefa tarefa = new Tarefa(1, "Estudar", "Revisar Generics");
+
+        manager.adicionarTarefa(tarefa);
+
+        assertEquals(List.of(tarefa), manager.obterTarefas());
+        assertEquals(1, TaskManager.quantidade(manager.obterTarefas()));
+    }
+
+    @Test
+    void deveAceitarSubclasseDeTarefa() {
+        TaskManager<TarefaPrioritaria> manager = new TaskManager<>();
+        TarefaPrioritaria tarefa = new TarefaPrioritaria(
+                1,
+                "Entrega",
+                "Finalizar projeto",
+                "Alta"
+        );
+
+        manager.adicionarTarefa(tarefa);
+
+        assertEquals("Alta", manager.obterTarefas().get(0).getPrioridade());
+    }
+
+    @Test
+    void deveConcluirTarefaApenasUmaVez() throws Exception {
+        TaskManager<Tarefa> manager = new TaskManager<>();
+        manager.adicionarTarefa(new Tarefa(1, "Tarefa", "Descrição"));
+
+        manager.concluirTarefa(1);
+
+        assertThrows(
+                TarefaJaConcluidaException.class,
+                () -> manager.concluirTarefa(1)
+        );
+    }
+
+    @Test
+    void deveCopiarTarefasUsandoCuringas() {
+        TaskManager<TarefaPrioritaria> manager = new TaskManager<>();
+        TarefaPrioritaria tarefa = new TarefaPrioritaria(
+                1,
+                "Tarefa",
+                "Descrição",
+                "Alta"
+        );
+        List<TarefaPrioritaria> origem = List.of(tarefa);
+        List<Tarefa> destino = new ArrayList<>();
+
+        manager.copiarPara(destino, origem);
+
+        assertEquals(List.of(tarefa), destino);
+    }
+
+    @Test
+    void deveInformarQuandoIdNaoExiste() {
+        TaskManager<Tarefa> manager = new TaskManager<>();
+
+        assertThrows(
+                TarefaNaoEncontradaException.class,
+                () -> manager.removerTarefa(99)
+        );
+    }
+}
