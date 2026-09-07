@@ -1,622 +1,218 @@
-# 📋 Task Manager
-
-![Java](https://img.shields.io/badge/Java-17-orange)
-![Maven](https://img.shields.io/badge/Maven-3.x-red)
-![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-brightgreen)
-![License](https://img.shields.io/badge/Licença-Educacional-blue)
-
-Sistema de Gerenciamento de Tarefas desenvolvido em **Java**, utilizando os conceitos de **Programação Orientada a Objetos (POO)** e arquitetura **MVC (Model-View-Controller)**.
-
-Este projeto foi desenvolvido como atividade prática da disciplina de **Java** da **Residência em TIC - IREDE**, tendo como objetivo consolidar os conhecimentos adquiridos durante o curso por meio do desenvolvimento de uma aplicação em modo console.
-
----
-
-# 🎯 Objetivo
-
-Desenvolver uma aplicação capaz de gerenciar tarefas através do terminal, permitindo ao usuário realizar operações de cadastro, consulta, atualização e remoção de tarefas.
-
-Além das funcionalidades propostas, o projeto aplica conceitos importantes da linguagem Java, como:
-
-- Programação Orientada a Objetos
-- Encapsulamento
-- Enum
-- Collections
-- Tratamento de Exceções
-- Organização em Packages
-- Arquitetura MVC
-
----
-
-# 🚀 Funcionalidades
-
-O sistema permite:
-
-- ✅ Cadastrar tarefas
-- ✅ Listar todas as tarefas
-- ✅ Concluir tarefas
-- ✅ Remover tarefas
-- ✅ Validar entradas do usuário
-- ✅ Tratar exceções personalizadas
-- ✅ Interface em modo Console
-
----
-
-# 💻 Tecnologias Utilizadas
-
-| Tecnologia | Versão |
-|------------|---------|
-| Java | 17 |
-| Maven | 3.x |
-| Apache NetBeans | IDE oficial utilizada no curso |
-| IntelliJ IDEA | Compatível |
-
----
-
-# 📁 Estrutura do Projeto
-
-```
-taskManager
-│
-├── src
-│   └── main
-│       └── java
-│           └── br
-│               └── org
-│                   └── irede
-│                       └── taskmanager
-│
-│                           ├── app
-│                           │     └── Main.java
-│                           │
-│                           ├── controller
-│                           │     └── TaskController.java
-│                           │
-│                           ├── model
-│                           │     ├── Tarefa.java
-│                           │     └── StatusTarefa.java
-│                           │
-│                           ├── view
-│                           │     └── Menu.java
-│                           │
-│                           ├── exception
-│                           │     ├── EntradaInvalidaException.java
-│                           │     ├── TarefaNaoEncontradaException.java
-│                           │     └── TarefaJaConcluidaException.java
-│                           │
-│                           └── utils
-│                                 └── Formatador.java
-│
-├── pom.xml
-└── README.md
-```
-
----
-
-# 🏛 Arquitetura
-
-O projeto foi desenvolvido seguindo a arquitetura **MVC (Model-View-Controller)**.
-
-```
-                 Usuário
-                    │
-                    ▼
-              Menu (View)
-                    │
-                    ▼
-      TaskController (Controller)
-                    │
-                    ▼
-            Tarefa (Model)
-```
-
-## Model
-
-Responsável pelos dados da aplicação.
-
-Classes:
-
-- Tarefa
-- StatusTarefa
-
----
-
-## View
-
-Responsável pela interação com o usuário.
-
-Classe:
-
-- Menu
-
----
-
-## Controller
-
-Responsável por toda a lógica do sistema.
-
-Classe:
-
-- TaskController
-
----
-
-## Exception
-
-Responsável pelo tratamento das exceções personalizadas.
-
-Classes:
-
-- EntradaInvalidaException
-- TarefaNaoEncontradaException
-- TarefaJaConcluidaException
-
----
-
-## Utils
-
-Responsável pelos métodos auxiliares.
-
-Classe:
-
-- Formatador
-
----
-
-# ▶ Como Executar
-
-## Clonar o projeto
-
-```bash
-git clone https://github.com/seu-usuario/taskManager.git
-```
-
-ou apenas abra o projeto diretamente no Apache NetBeans ou IntelliJ IDEA.
-
----
-
-## Compilar
-
-```bash
-mvn clean compile
-```
-
----
-
-## Executar
-
-```bash
-mvn exec:java
-```
-
-ou
-
-```bash
-mvn clean compile exec:java
-```
-
-Também é possível executar diretamente a classe:
-
-```
-Main.java
-```
-
----
-
-# 🖥 Exemplo Completo de Utilização
-
-Ao iniciar a aplicação, será apresentado o menu principal.
-
-```
-========================================
-           TASK MANAGER
-========================================
-
-1 - Adicionar tarefa
-2 - Listar tarefas
-3 - Concluir tarefa
-4 - Remover tarefa
-0 - Sair
-
-Escolha uma opção:
-```
-
----
-
-## 1️⃣ Adicionar uma tarefa
-
-```
-Escolha uma opção: 1
-
-========================================
-          NOVA TAREFA
-========================================
-
-Digite o título:
-
-Estudar Java
-
-Digite a descrição:
-
-Revisar Programação Orientada a Objetos.
-
-Tarefa cadastrada com sucesso!
-
-ID da tarefa: 1
-```
-
----
-
-## 2️⃣ Adicionar uma segunda tarefa
-
-```
-Escolha uma opção: 1
-
-========================================
-          NOVA TAREFA
-========================================
-
-Digite o título:
-
-Desenvolver Task Manager
-
-Digite a descrição:
-
-Implementar o projeto final da disciplina.
-
-Tarefa cadastrada com sucesso!
-
-ID da tarefa: 2
-```
-
----
-
-## 3️⃣ Listar tarefas
-
-```
-Escolha uma opção: 2
-
-========================================
-        LISTA DE TAREFAS
-========================================
-
-ID: 1
-
-Título: Estudar Java
-
-Descrição: Revisar Programação Orientada a Objetos.
-
-Status: Pendente
-
-----------------------------------------
-
-ID: 2
-
-Título: Desenvolver Task Manager
-
-Descrição: Implementar o projeto final da disciplina.
-
-Status: Pendente
-```
-
----
-
-## 4️⃣ Concluir uma tarefa
-
-```
-Escolha uma opção: 3
-
-========================================
-       CONCLUIR TAREFA
-========================================
-
-Digite o ID da tarefa:
-
-1
-
-Tarefa concluída com sucesso!
-```
-
----
-
-## 5️⃣ Listar novamente
-
-```
-Escolha uma opção: 2
-
-========================================
-        LISTA DE TAREFAS
-========================================
-
-ID: 1
-
-Título: Estudar Java
-
-Descrição: Revisar Programação Orientada a Objetos.
-
-Status: Concluída
-
-----------------------------------------
-
-ID: 2
-
-Título: Desenvolver Task Manager
-
-Descrição: Implementar o projeto final da disciplina.
-
-Status: Pendente
-```
-
----
-
-## 6️⃣ Remover uma tarefa
-
-```
-Escolha uma opção: 4
-
-========================================
-        REMOVER TAREFA
-========================================
-
-Digite o ID da tarefa:
-
-2
-
-Tarefa removida com sucesso!
-```
-
----
-
-## 7️⃣ Listagem após remoção
-
-```
-Escolha uma opção: 2
-
-========================================
-        LISTA DE TAREFAS
-========================================
-
-ID: 1
-
-Título: Estudar Java
-
-Descrição: Revisar Programação Orientada a Objetos.
-
-Status: Concluída
-```
-
----
-
-## 8️⃣ Exemplo de erro
-
-Tentando concluir uma tarefa inexistente.
-
-```
-Escolha uma opção: 3
-
-Digite o ID da tarefa:
-
-10
-
-Erro: Nenhuma tarefa foi encontrada com o ID 10.
-```
-
----
-
-## 9️⃣ Exemplo de validação
-
-Tentando cadastrar uma tarefa sem informar o título.
-
-```
-Escolha uma opção: 1
-
-Digite o título:
-
-
-Digite a descrição:
-
-Teste
-
-Erro: O título da tarefa não pode ficar vazio.
-```
-
----
-
-## 🔟 Encerrando a aplicação
-
-```
-Escolha uma opção: 0
-
-Task Manager encerrado.
-
-Obrigado por utilizar o sistema!
-```
-
----
-
-# 🔄 Fluxo da Aplicação
-
-```
-Início
-   │
-   ▼
-Menu Principal
-   │
-   ├──────────────► Adicionar Tarefa
-   │
-   ├──────────────► Listar Tarefas
-   │
-   ├──────────────► Concluir Tarefa
-   │
-   ├──────────────► Remover Tarefa
-   │
-   └──────────────► Encerrar Sistema
-```
-
----
-
-# 📚 Conceitos Aplicados
-
-Durante o desenvolvimento foram utilizados os seguintes conceitos:
-
-## Programação Orientada a Objetos
-
-- Classes
-- Objetos
-- Encapsulamento
-- Construtores
-- Métodos
-- Sobrescrita de métodos (`toString()`)
-
----
-
-## Organização em Pacotes
-
-Separação da aplicação em:
-
-- app
-- controller
-- model
-- view
-- exception
-- utils
-
----
-
-## Collections
-
-Utilização da classe:
-
-```
-ArrayList
-```
-
-para armazenamento das tarefas em memória.
-
----
-
-## Enum
-
-Utilização da enumeração:
-
-```
-StatusTarefa
-```
-
-Estados disponíveis:
-
-- PENDENTE
-- CONCLUIDA
-
----
-
-## Tratamento de Exceções
-
-Foram implementadas exceções personalizadas para melhorar o controle dos erros da aplicação.
-
-- EntradaInvalidaException
-- TarefaNaoEncontradaException
-- TarefaJaConcluidaException
-
----
-
-# 📌 Funcionamento Interno
-
-A aplicação segue o seguinte fluxo:
-
-```
+# TaskManager
+
+[![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![Maven](https://img.shields.io/badge/Maven-3.x-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)](https://maven.apache.org/)
+[![JavaFX](https://img.shields.io/badge/JavaFX-21.0.2-4285F4?style=for-the-badge&logo=java&logoColor=white)](https://openjfx.io/)
+[![SQLite](https://img.shields.io/badge/SQLite-3.45.3.0-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![JUnit](https://img.shields.io/badge/JUnit-5.10.2-25A162?style=for-the-badge&logo=junit5&logoColor=white)](https://junit.org/junit5/)
+
+Gerenciador de tarefas desenvolvido em Java para a Residência em TIC - IREDE.
+O projeto reúne uma versão de terminal e uma interface gráfica JavaFX, com
+persistência em SQLite, testes automatizados e exemplos de Programação
+Orientada a Objetos.
+
+## Escopo
+
+O projeto foi organizado em duas formas de uso:
+
+1. **Modo console:** fluxo simples para cadastrar, listar, concluir e remover
+   tarefas em memória.
+2. **Modo gráfico:** interface JavaFX com FXML e CSS para cadastrar, listar,
+   editar, concluir e remover tarefas persistidas em SQLite.
+
+Além das operações de tarefas, o código demonstra encapsulamento, enum,
+herança, generics com curingas, tratamento de exceções e acesso seguro ao
+banco de dados usando `PreparedStatement`.
+
+## Funcionalidades
+
+- Cadastro de tarefas com título e descrição.
+- Listagem ordenada por identificador.
+- Edição de tarefas pela interface gráfica.
+- Conclusão de tarefas com controle de status.
+- Remoção com confirmação na interface gráfica.
+- Validação de entradas obrigatórias.
+- Exceções específicas para regras de negócio.
+- Persistência em SQLite com criação automática da tabela.
+- Transações para salvar lotes de tarefas com `commit` e `rollback`.
+- Testes de regras de negócio e persistência usando SQLite em memória.
+- Compatibilidade entre execução pelo terminal, IntelliJ IDEA e NetBeans.
+
+## Tecnologias e conceitos
+
+| Tecnologia ou conceito | Aplicação no projeto |
+| --- | --- |
+| Java 17 | Linguagem principal e compilação do projeto |
+| Maven | Dependências, testes e execução |
+| JavaFX 21 | Interface gráfica |
+| FXML e CSS | Estrutura e estilo da interface |
+| SQLite | Banco de dados local |
+| JDBC | Conexão e operações de persistência |
+| `PreparedStatement` | Execução segura das instruções SQL |
+| JUnit 5 | Testes automatizados |
+| Generics | `TaskManager<T extends Tarefa>` e wildcards |
+| MVC | Separação entre aplicação, controle, modelo e visualização |
+
+## Arquitetura
+
+```text
 Usuário
-
-↓
-
-Menu
-
-↓
-
-TaskController
-
-↓
-
-Tarefa
-
-↓
-
-Resposta ao usuário
+   |
+   +--> Menu / JavaFX
+           |
+           +--> Controllers
+                   |
+                   +--> Tarefa e regras de negócio
+                   |
+                   +--> TarefaRepository
+                           |
+                           +--> SQLite
 ```
 
-O modo console utiliza uma lista em memória (`ArrayList<Tarefa>`). A interface
-JavaFX utiliza o `TarefaRepository` para persistir as tarefas em SQLite por
-meio de JDBC.
+## Estrutura do projeto
 
----
+```text
+taskManager/
+├── pom.xml
+├── README.md
+├── src/
+│   ├── main/
+│   │   ├── java/br/org/irede/taskmanager/
+│   │   │   ├── app/
+│   │   │   │   ├── Launcher.java
+│   │   │   │   ├── Main.java
+│   │   │   │   └── MainApplication.java
+│   │   │   ├── controller/
+│   │   │   │   ├── TaskController.java
+│   │   │   │   ├── TarefaFormDialog.java
+│   │   │   │   └── TarefaFxController.java
+│   │   │   ├── database/
+│   │   │   │   ├── Conexao.java
+│   │   │   │   └── DatabaseInitializer.java
+│   │   │   ├── exception/
+│   │   │   │   ├── EntradaInvalidaException.java
+│   │   │   │   ├── TarefaJaConcluidaException.java
+│   │   │   │   └── TarefaNaoEncontradaException.java
+│   │   │   ├── model/
+│   │   │   │   ├── StatusTarefa.java
+│   │   │   │   ├── Tarefa.java
+│   │   │   │   ├── TarefaPrioritaria.java
+│   │   │   │   └── TaskManager.java
+│   │   │   ├── repository/
+│   │   │   │   └── TarefaRepository.java
+│   │   │   ├── utils/
+│   │   │   │   └── Formatador.java
+│   │   │   └── view/
+│   │   │       └── Menu.java
+│   │   └── resources/view/
+│   │       ├── estilo.css
+│   │       └── principal.fxml
+│   └── test/java/br/org/irede/taskmanager/
+│       ├── model/TaskManagerTest.java
+│       └── repository/TarefaRepositoryTest.java
+└── taskmanager.db                         # criado na execução
+```
 
-# 🔮 Melhorias Futuras
+## Pré-requisitos
 
-Este projeto poderá ser expandido com novas funcionalidades, como:
+- JDK 17 ou superior.
+- Maven 3.x.
+- IntelliJ IDEA, Apache NetBeans ou outra IDE compatível com Maven.
 
-- Salvamento em arquivos
-- Pesquisa por título
-- Pesquisa por status
-- Prioridade das tarefas
-- Datas de vencimento
-- API REST utilizando Spring Boot
-- Autenticação de usuários
-- Relatórios de tarefas
+O projeto está configurado para JavaFX no Windows, com o classificador
+`win` definido no `pom.xml`.
 
----
+## Execução pelo terminal
 
-# 👨‍💻 Autor
-
-**MARCOS RAFAEL ALVES**
-
-Análista de Sistemas | Pós-Graduando em Testes de Software | Análise de Testes de Software Júníor
-
-Projeto desenvolvido para a disciplina de **Java** da **Residência em - IREDE**.
-
----
-
-# 📄 Licença
-
-Este projeto foi desenvolvido exclusivamente para fins acadêmicos e educacionais.
-
-Sua utilização é livre para estudos e aperfeiçoamento da linguagem Java.
-
----
-
-⭐ Caso este projeto tenha sido útil para seus estudos, deixe uma estrela no repositório!
-
----
-
-# Versão Intermediária
-
-Esta versão também contém a evolução solicitada no módulo intermediário:
-
-- `TaskManager<T extends Tarefa>` com `?`, `? extends T` e `? super T`;
-- interface gráfica JavaFX com FXML e CSS;
-- persistência SQLite usando JDBC e `PreparedStatement`;
-- testes automatizados com JUnit 5;
-- `TarefaPrioritaria` como exemplo de subclasse aceita pelo Generic.
-
-O projeto mantém os dois modos de execução: `Main.java` para o fluxo em
-console e `Launcher.java` para a interface JavaFX. A aplicação gráfica permite
-cadastrar, listar, editar, concluir e remover tarefas persistidas no banco.
-
-## Executar a interface gráfica
+### Interface gráfica
 
 ```bash
 mvn clean javafx:run
 ```
 
-Ou:
+Também é possível usar:
 
 ```bash
 mvn clean compile exec:java
 ```
 
-O banco `taskmanager.db` e a tabela `tarefas` são criados automaticamente na
-primeira execução.
+A classe principal da interface é:
 
-## Executar os testes
+```text
+br.org.irede.taskmanager.app.Launcher
+```
+
+Ela inicializa o banco e abre a aplicação JavaFX.
+
+### Modo console
+
+```bash
+mvn compile exec:java -Dexec.mainClass=br.org.irede.taskmanager.app.Main
+```
+
+O menu de terminal possui as opções de adicionar, listar, concluir, remover e
+encerrar a aplicação.
+
+## Execução no IntelliJ IDEA
+
+1. Abra a pasta do projeto ou o arquivo `pom.xml`.
+2. Aguarde o carregamento das dependências Maven.
+3. Configure o Project SDK como Java 17 ou superior.
+4. Para a interface, execute `Launcher.java`.
+5. Para o console, execute `Main.java`.
+
+Outra opção é abrir o terminal integrado e executar `mvn clean javafx:run`.
+
+## Execução no NetBeans
+
+1. Abra o projeto como projeto Maven.
+2. Clique com o botão direito no projeto.
+3. Selecione **Run Maven** ou **Custom Goals**.
+4. Execute o objetivo:
+
+```text
+clean javafx:run
+```
+
+Para rodar os testes, use a opção **Test** do projeto ou execute `mvn test` no
+terminal integrado.
+
+## Testes automatizados
+
+Os testes ficam em `src/test/java` e cobrem:
+
+- inclusão e consulta de tarefas genéricas;
+- aceitação de `TarefaPrioritaria`;
+- conclusão única de uma tarefa;
+- busca e remoção de identificadores inexistentes;
+- uso de listas com wildcards;
+- CRUD completo no SQLite;
+- geração de identificadores pelo banco;
+- commit e rollback de operações transacionais;
+- cenário de planejamento de um churrasco com compras e pedido de comida.
+
+Execute a suíte completa com:
 
 ```bash
 mvn test
 ```
+
+Os testes de persistência usam `jdbc:sqlite::memory:` e não alteram o banco
+principal do projeto.
+
+## Banco de dados
+
+Na primeira execução da interface gráfica, o arquivo `taskmanager.db` é criado
+na raiz do projeto. A tabela `tarefas` é inicializada automaticamente com os
+campos `id`, `titulo`, `descricao` e `status`.
+
+## Autor
+
+**Marcos Rafael Alves**
+
+Projeto acadêmico desenvolvido para a disciplina de Java da Residência em TIC
+- IREDE.
+
+## Licença
+
+Projeto desenvolvido para fins acadêmicos e educacionais.
