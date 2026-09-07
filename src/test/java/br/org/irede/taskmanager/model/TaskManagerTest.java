@@ -69,6 +69,35 @@ class TaskManagerTest {
     }
 
     @Test
+    void devePlanejarChurrascoComListaDeComprasEPedido() {
+        TaskManager<Tarefa> manager = new TaskManager<>();
+
+        Tarefa comprarMercado = new Tarefa(
+                1,
+                "Fazer churrasco",
+                "Passar no mercado e comprar carnes, bebidas, carvão e descartáveis"
+        );
+        Tarefa pedirIfood = new Tarefa(
+                2,
+                "Pedir Ifood",
+                "Pedir comida japonesa e da promoção"
+        );
+
+        manager.adicionarTarefa(comprarMercado);
+        manager.adicionarTarefa(pedirIfood);
+
+        assertEquals(2, manager.obterTarefas().size());
+        assertEquals(
+                "Passar no mercado e comprar carnes, bebidas, carvão e descartáveis",
+                manager.obterTarefas().get(0).getDescricao()
+        );
+        assertEquals(
+                "Pedir comida japonesa e da promoção",
+                manager.obterTarefas().get(1).getDescricao()
+        );
+    }
+
+    @Test
     void deveInformarQuandoIdNaoExiste() {
         TaskManager<Tarefa> manager = new TaskManager<>();
 
