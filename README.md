@@ -206,9 +206,12 @@ Na primeira execução da interface gráfica, o arquivo `taskmanager.db` é cria
 na raiz do projeto. A tabela `tarefas` é inicializada automaticamente com os
 campos `id`, `titulo`, `descricao` e `status`.
 
-## Autor
+# 👨‍💻 Autor
+[](https://github.com/rafaelAlvesQaTester/taskManagerIredeIntermediario#%E2%80%8D-autor)
 
-**Marcos Rafael Alves**
+**MARCOS RAFAEL ALVES**
+
+Análista de Sistemas | Pós-Graduando em Testes de Software | Análise de Testes de Software Júníor
 
 Projeto acadêmico desenvolvido para a disciplina de Java da Residência em TIC
 - IREDE.
