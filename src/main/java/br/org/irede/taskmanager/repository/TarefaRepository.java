@@ -44,6 +44,24 @@ public class TarefaRepository {
         }
     }
 
+    public void salvarComTransacao(List<? extends Tarefa> tarefas)
+            throws SQLException {
+        boolean autoCommitOriginal = conexao.getAutoCommit();
+        conexao.setAutoCommit(false);
+
+        try {
+            for (Tarefa tarefa : tarefas) {
+                salvar(tarefa);
+            }
+            conexao.commit();
+        } catch (SQLException exception) {
+            conexao.rollback();
+            throw exception;
+        } finally {
+            conexao.setAutoCommit(autoCommitOriginal);
+        }
+    }
+
     public List<Tarefa> listar() throws SQLException {
         String sql = """
                 SELECT id, titulo, descricao, status

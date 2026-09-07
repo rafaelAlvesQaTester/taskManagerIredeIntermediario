@@ -6,8 +6,11 @@ import br.org.irede.taskmanager.model.Tarefa;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TarefaRepositoryTest {
@@ -32,6 +35,37 @@ class TarefaRepositoryTest {
             );
 
             repository.excluir(tarefa.getId());
+            assertTrue(repository.listar().isEmpty());
+        }
+    }
+
+    @Test
+    void deveConfirmarOuDesfazerLoteEmUmaTransacao() throws Exception {
+        try (Connection conexao = Conexao.conectarTeste()) {
+            DatabaseInitializer.inicializar(conexao);
+            TarefaRepository repository = new TarefaRepository(conexao);
+
+            repository.salvarComTransacao(List.of(
+                    new Tarefa(0, "Primeira tarefa", "Descrição"),
+                    new Tarefa(0, "Segunda tarefa", "Descrição")
+            ));
+
+            assertEquals(2, repository.listar().size());
+        }
+
+        try (Connection conexao = Conexao.conectarTeste()) {
+            DatabaseInitializer.inicializar(conexao);
+            TarefaRepository repository = new TarefaRepository(conexao);
+            Tarefa tarefaInvalida = new Tarefa(0, null, "Descrição");
+
+            assertThrows(
+                    SQLException.class,
+                    () -> repository.salvarComTransacao(List.of(
+                            new Tarefa(0, "Tarefa válida", "Descrição"),
+                            tarefaInvalida
+                    ))
+            );
+
             assertTrue(repository.listar().isEmpty());
         }
     }

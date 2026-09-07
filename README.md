@@ -543,7 +543,9 @@ Tarefa
 Resposta ao usuário
 ```
 
-Todo o processamento é realizado em memória utilizando uma lista (`ArrayList<Tarefa>`).
+O modo console utiliza uma lista em memória (`ArrayList<Tarefa>`). A interface
+JavaFX utiliza o `TarefaRepository` para persistir as tarefas em SQLite por
+meio de JDBC.
 
 ---
 
@@ -551,17 +553,14 @@ Todo o processamento é realizado em memória utilizando uma lista (`ArrayList<T
 
 Este projeto poderá ser expandido com novas funcionalidades, como:
 
-- Persistência em banco de dados
 - Salvamento em arquivos
-- Edição de tarefas
 - Pesquisa por título
 - Pesquisa por status
 - Prioridade das tarefas
 - Datas de vencimento
-- Interface gráfica com JavaFX
 - API REST utilizando Spring Boot
 - Autenticação de usuários
-- Testes automatizados
+- Relatórios de tarefas
 
 ---
 
@@ -596,6 +595,10 @@ Esta versão também contém a evolução solicitada no módulo intermediário:
 - persistência SQLite usando JDBC e `PreparedStatement`;
 - testes automatizados com JUnit 5;
 - `TarefaPrioritaria` como exemplo de subclasse aceita pelo Generic.
+
+O projeto mantém os dois modos de execução: `Main.java` para o fluxo em
+console e `Launcher.java` para a interface JavaFX. A aplicação gráfica permite
+cadastrar, listar, editar, concluir e remover tarefas persistidas no banco.
 
 ## Executar a interface gráfica
 
