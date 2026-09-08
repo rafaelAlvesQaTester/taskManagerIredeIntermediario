@@ -1,5 +1,6 @@
 package br.org.irede.taskmanager.model;
 
+import br.org.irede.taskmanager.exception.EntradaInvalidaException;
 import br.org.irede.taskmanager.exception.TarefaJaConcluidaException;
 
 public class Tarefa {
@@ -34,6 +35,19 @@ public class Tarefa {
 
     public StatusTarefa getStatus() {
         return status;
+    }
+
+    public void validar() throws EntradaInvalidaException {
+        validarTitulo(titulo);
+        }
+
+        public static void validarTitulo(String titulo)
+            throws EntradaInvalidaException {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            throw new EntradaInvalidaException(
+                    "Informe o titulo da tarefa."
+            );
+        }
     }
 
     public boolean isConcluida() {

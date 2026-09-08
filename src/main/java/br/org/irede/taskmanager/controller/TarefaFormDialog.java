@@ -1,5 +1,6 @@
 package br.org.irede.taskmanager.controller;
 
+import br.org.irede.taskmanager.exception.EntradaInvalidaException;
 import br.org.irede.taskmanager.model.Tarefa;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -85,10 +86,13 @@ public class TarefaFormDialog {
 
     private void salvar() {
         String titulo = campoTitulo.getText().trim();
-        if (titulo.isEmpty()) {
+
+        try {
+            Tarefa.validarTitulo(titulo);
+        } catch (EntradaInvalidaException exception) {
             new Alert(
                     Alert.AlertType.WARNING,
-                    "Informe o título da tarefa."
+                    exception.getMessage()
             ).showAndWait();
             return;
         }
