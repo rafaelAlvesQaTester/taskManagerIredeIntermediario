@@ -3,7 +3,7 @@
 [![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Maven](https://img.shields.io/badge/Maven-3.x-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)](https://maven.apache.org/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-21.0.2-4285F4?style=for-the-badge&logo=java&logoColor=white)](https://openjfx.io/)
-[![SQLite](https://img.shields.io/badge/SQLite-3.45.3.0-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-3.53.4.0-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![JUnit](https://img.shields.io/badge/JUnit-5.10.2-25A162?style=for-the-badge&logo=junit5&logoColor=white)](https://junit.org/junit5/)
 
 Gerenciador de tarefas desenvolvido em Java para a Residência em TIC - IREDE.
@@ -17,8 +17,8 @@ O projeto foi organizado em duas formas de uso:
 
 1. **Modo console:** fluxo simples para cadastrar, listar, concluir e remover
    tarefas em memória.
-2. **Modo gráfico:** interface JavaFX com FXML e CSS para cadastrar, listar,
-   editar, concluir e remover tarefas persistidas em SQLite.
+2. **Modo gráfico:** interface JavaFX com tela principal e formulário de
+        cadastro/edição em FXML e CSS, com persistência em SQLite.
 
 Além das operações de tarefas, o código demonstra encapsulamento, enum,
 herança, generics com curingas, tratamento de exceções e acesso seguro ao
@@ -32,11 +32,22 @@ banco de dados usando `PreparedStatement`.
 - Conclusão de tarefas com controle de status.
 - Remoção com confirmação na interface gráfica.
 - Validação de entradas obrigatórias.
+- Título obrigatório e descrição opcional, que pode ficar vazia.
 - Exceções específicas para regras de negócio.
 - Persistência em SQLite com criação automática da tabela.
 - Transações para salvar lotes de tarefas com `commit` e `rollback`.
 - Testes de regras de negócio e persistência usando SQLite em memória.
 - Compatibilidade entre execução pelo terminal, IntelliJ IDEA e NetBeans.
+
+## Telas
+
+- **Tela principal:** lista as tarefas e permite cadastrar, editar, concluir e
+  remover com confirmação, além de atualizar a listagem.
+- **Formulário de tarefa (`tarefa-form.fxml`):** permite informar título,
+  descrição opcional e status de conclusão; atende ao cadastro e à edição.
+
+O título não pode ser nulo, vazio ou conter somente espaços. A descrição pode
+ser deixada vazia.
 
 ## Tecnologias e conceitos
 
@@ -44,9 +55,9 @@ banco de dados usando `PreparedStatement`.
 | --- | --- |
 | Java 17 | Linguagem principal e compilação do projeto |
 | Maven | Dependências, testes e execução |
-| JavaFX 21 | Interface gráfica |
-| FXML e CSS | Estrutura e estilo da interface |
-| SQLite | Banco de dados local |
+| JavaFX 21 | Interface gráfica compatível com Java 17 ou superior |
+| FXML e CSS | Tela principal e formulário separados dos controllers |
+| SQLite 3.53.4.0 | Banco de dados local |
 | JDBC | Conexão e operações de persistência |
 | `PreparedStatement` | Execução segura das instruções SQL |
 | JUnit 5 | Testes automatizados |
@@ -72,7 +83,7 @@ Usuário
 ## Estrutura do projeto
 
 ```text
-taskManager/
+taskManagerIredeIntermediario/
 ├── pom.xml
 ├── README.md
 ├── src/
@@ -84,6 +95,7 @@ taskManager/
 │   │   │   │   └── MainApplication.java
 │   │   │   ├── controller/
 │   │   │   │   ├── TaskController.java
+│   │   │   │   ├── TarefaFormController.java
 │   │   │   │   ├── TarefaFormDialog.java
 │   │   │   │   └── TarefaFxController.java
 │   │   │   ├── database/
@@ -106,9 +118,13 @@ taskManager/
 │   │   │       └── Menu.java
 │   │   └── resources/view/
 │   │       ├── estilo.css
-│   │       └── principal.fxml
+│   │       ├── principal.fxml
+│   │       └── tarefa-form.fxml
 │   └── test/java/br/org/irede/taskmanager/
-│       ├── model/TaskManagerTest.java
+│       ├── controller/TarefaFxControllerTest.java
+│       ├── model/
+│       │   ├── TarefaTest.java
+│       │   └── TaskManagerTest.java
 │       └── repository/TarefaRepositoryTest.java
 └── taskmanager.db                         # criado na execução
 ```
@@ -134,6 +150,12 @@ Também é possível usar:
 
 ```bash
 mvn clean compile exec:java
+```
+
+Para executar todos os testes automatizados:
+
+```bash
+mvn clean test
 ```
 
 A classe principal da interface é:
@@ -181,15 +203,14 @@ terminal integrado.
 
 Os testes ficam em `src/test/java` e cobrem:
 
-- inclusão e consulta de tarefas genéricas;
-- aceitação de `TarefaPrioritaria`;
-- conclusão única de uma tarefa;
-- busca e remoção de identificadores inexistentes;
-- uso de listas com wildcards;
-- CRUD completo no SQLite;
-- geração de identificadores pelo banco;
-- commit e rollback de operações transacionais;
-- cenário de planejamento de um churrasco com compras e pedido de comida.
+- criação de tarefa pendente, edição de dados e identificador, representação textual e conclusão única;
+- rejeição de título nulo ou composto apenas por espaços e aceitação de descrição vazia;
+- inclusão e consulta de tarefas genéricas, aceitação de `TarefaPrioritaria` e cópia entre listas com wildcards;
+- conclusão de tarefas, tratamento de identificador inexistente e validações de título e status;
+- CRUD no SQLite em memória, incluindo geração do identificador, atualização, exclusão e persistência do status concluído;
+- commit de lote e rollback completo quando uma tarefa do lote falha;
+- armazenamento literal de título com conteúdo semelhante a SQL;
+- preservação do estado pendente em memória quando falha a gravação da conclusão.
 
 Execute a suíte completa com:
 
@@ -203,15 +224,16 @@ principal do projeto.
 ## Banco de dados
 
 Na primeira execução da interface gráfica, o arquivo `taskmanager.db` é criado
-na raiz do projeto. A tabela `tarefas` é inicializada automaticamente com os
-campos `id`, `titulo`, `descricao` e `status`.
+no diretório de trabalho atual (a raiz do projeto ao iniciar pelos comandos
+acima). A tabela `tarefas` é inicializada automaticamente com os campos `id`,
+`titulo`, `descricao` e `status`. Os testes usam um banco SQLite em memória e
+não alteram esse arquivo.
 
 # 👨‍💻 Autor
-[](https://github.com/rafaelAlvesQaTester/taskManagerIredeIntermediario#%E2%80%8D-autor)
 
 **MARCOS RAFAEL ALVES**
 
-Análista de Sistemas | Pós-Graduando em Testes de Software | Análise de Testes de Software Júníor
+Analista de Sistemas | Pós-Graduando em Testes de Software | Análise de Testes de Software Júnior
 
 Projeto acadêmico desenvolvido para a disciplina de Java da Residência em TIC
 - IREDE.

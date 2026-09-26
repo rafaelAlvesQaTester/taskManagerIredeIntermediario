@@ -35,6 +35,13 @@ public class TarefaFxController {
 
     private TarefaRepository repository;
 
+    public TarefaFxController() {
+    }
+
+    TarefaFxController(TarefaRepository repository) {
+        this.repository = repository;
+    }
+
     @FXML
     public void initialize() {
         try {
@@ -97,12 +104,22 @@ public class TarefaFxController {
         }
 
         try {
-            selecionada.concluir();
-            repository.atualizar(selecionada);
+            salvarConclusao(selecionada);
             carregarTarefas();
         } catch (Exception exception) {
             mostrarErro("Erro ao concluir tarefa.", exception);
         }
+    }
+
+    void salvarConclusao(Tarefa selecionada) throws Exception {
+        Tarefa tarefaAtualizada = new Tarefa(
+                selecionada.getId(),
+                selecionada.getTitulo(),
+                selecionada.getDescricao()
+        );
+        tarefaAtualizada.setConcluida(selecionada.isConcluida());
+        tarefaAtualizada.concluir();
+        repository.atualizar(tarefaAtualizada);
     }
 
     @FXML

@@ -1,5 +1,6 @@
 package br.org.irede.taskmanager.model;
 
+import br.org.irede.taskmanager.exception.EntradaInvalidaException;
 import br.org.irede.taskmanager.exception.TarefaJaConcluidaException;
 import org.junit.jupiter.api.Test;
 
@@ -100,4 +101,25 @@ class TarefaTest {
                 tarefa::concluir
         );
     }
+
+        @Test
+        void deveRejeitarTituloNuloOuSomenteEspacos() {
+                assertThrows(
+                                EntradaInvalidaException.class,
+                                () -> Tarefa.validarTitulo(null)
+                );
+                assertThrows(
+                                EntradaInvalidaException.class,
+                                () -> Tarefa.validarTitulo("   ")
+                );
+        }
+
+        @Test
+        void devePermitirDescricaoVaziaQuandoTituloEhValido() throws Exception {
+                Tarefa tarefa = new Tarefa(1, "Estudar", "");
+
+                tarefa.validar();
+
+                assertEquals("", tarefa.getDescricao());
+        }
 }
